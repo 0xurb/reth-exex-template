@@ -1,0 +1,36 @@
+[package]
+name = "exex"
+description = "Reth ExEx core crate"
+rust-version.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+exex-db.workspace = true
+exex-primitives.workspace = true
+
+# reth
+reth.workspace = true
+reth-node-optimism = { workspace = true, optional = true, features = [
+    "optimism",
+] }
+
+# other
+clap = { workspace = true, optional = true }
+
+[features]
+optimism = [
+    "dep:clap",
+    "dep:reth-node-optimism",
+    "reth/optimism",
+    # "reth-primitives/optimism",
+    # "reth-rpc/optimism",
+    # "reth-provider/optimism",
+    # "reth-beacon-consensus/optimism",
+    # "reth-blockchain-tree/optimism",
+    # "reth-node-core/optimism",
+]

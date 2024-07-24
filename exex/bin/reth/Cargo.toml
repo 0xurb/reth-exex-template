@@ -1,0 +1,40 @@
+[package]
+name = "reth"
+description = "A Reth single-node implementation with a plugged ExEx."
+rust-version.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+exex.workspace = true
+clap = { workspace = true, features = ["derive", "env"] }
+eyre.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+tikv-jemallocator = { version = "0.5.0", optional = true }
+libc = "0.2"
+
+[features]
+default = ["jemalloc"]
+
+jemalloc = ["dep:tikv-jemallocator"]
+jemalloc-prof = ["jemalloc", "tikv-jemallocator?/profiling"]
+
+# no-op feature flag for switching between the `optimism` and default functionality in CI matrices
+ethereum = []
+optimism = [
+    "exex/optimism"
+]
+
+[[bin]]
+name = "reth"
+path = "src/main.rs"
+
+[[bin]]
+name = "op-reth"
+path = "src/optimism.rs"
+required-features = ["optimism"]

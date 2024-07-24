@@ -1,0 +1,6 @@
+exex/target
+
+.*env
+
+.vscode
+*.pdb
