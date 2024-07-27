@@ -12,8 +12,6 @@ endif
 
 # Cargo profile for builds. Default is for local builds, CI uses an override.
 PROFILE ?= release
-# Features in reth/op-reth binary crate other than "ethereum" and "optimism"
-BIN_OTHER_FEATURES := asm-keccak jemalloc jemalloc-prof min-error-logs min-warn-logs min-info-logs min-debug-logs min-trace-logs
 
 ##@ Build
 
@@ -39,6 +37,16 @@ build: ## Build the reth binary into `target` directory.
 build-op: ## Build the op-reth binary into `target` directory.
 	cargo build --bin op-reth --features "optimism,$(FEATURES)" --profile "$(PROFILE)"
 
-
 fmt:
 	cargo +nightly fmt
+
+test-reth:
+	cargo test --all-features
+
+test-doc:
+	cargo test --doc --workspace --features "ethereum"
+	cargo test --doc --workspace --features "optimism"
+
+test:
+	make test-reth && \
+	make test-doc

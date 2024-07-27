@@ -1,6 +1,6 @@
 [package]
-name = "exex-db"
-description = "Reth ExEx database utils, common types and bindings."
+name = "exex-backfill"
+description = "Reth ExEx backfill type-safe abstractions."
 rust-version.workspace = true
 version.workspace = true
 edition.workspace = true

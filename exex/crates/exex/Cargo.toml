@@ -10,27 +10,11 @@ license.workspace = true
 workspace = true
 
 [dependencies]
-exex-db.workspace = true
-exex-primitives.workspace = true
+exex-backfill.workspace = true
 
 # reth
 reth.workspace = true
-reth-node-optimism = { workspace = true, optional = true, features = [
-    "optimism",
-] }
-
+reth-exex.workspace = true
+reth-tracing.workspace = true
 # other
-clap = { workspace = true, optional = true }
-
-[features]
-optimism = [
-    "dep:clap",
-    "dep:reth-node-optimism",
-    "reth/optimism",
-    # "reth-primitives/optimism",
-    # "reth-rpc/optimism",
-    # "reth-provider/optimism",
-    # "reth-beacon-consensus/optimism",
-    # "reth-blockchain-tree/optimism",
-    # "reth-node-core/optimism",
-]
+eyre.workspace = true
