@@ -10,24 +10,41 @@ license.workspace = true
 workspace = true
 
 [dependencies]
-exex.workspace = true
-clap = { workspace = true, features = ["derive", "env"] }
 eyre.workspace = true
+exex.workspace = true
+reth.workspace = true
+reth-node-ethereum.workspace = true
+reth-node-optimism = { workspace = true, optional = true, features = [
+    "optimism",
+] }
+clap = { version = "4.5.3", features = ["derive", "env"], optional = true }
 
 [target.'cfg(unix)'.dependencies]
 tikv-jemallocator = { version = "0.5.0", optional = true }
-libc = "0.2"
+
+[dev-dependencies]
+reth-execution-types.workspace = true
+reth-exex-test-utils.workspace = true
+tokio.workspace = true
+serial_test.workspace = true
 
 [features]
 default = ["jemalloc"]
 
 jemalloc = ["dep:tikv-jemallocator"]
-jemalloc-prof = ["jemalloc", "tikv-jemallocator?/profiling"]
 
 # no-op feature flag for switching between the `optimism` and default functionality in CI matrices
 ethereum = []
 optimism = [
-    "exex/optimism"
+    "dep:clap",
+    "dep:reth-node-optimism",
+    "reth/optimism",
+    # "reth-primitives/optimism",
+    # "reth-rpc/optimism",
+    # "reth-provider/optimism",
+    # "reth-beacon-consensus/optimism",
+    # "reth-blockchain-tree/optimism",
+    # "reth-node-core/optimism",
 ]
 
 [[bin]]
