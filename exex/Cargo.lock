@@ -2443,7 +2443,11 @@ dependencies = [
 name = "exex-backfill"
 version = "1.0.0"
 dependencies = [
- "reth 1.0.3",
+ "eyre",
+ "futures",
+ "reth-exex",
+ "tokio",
+ "tokio-stream",
 ]
 
 [[package]]

@@ -11,4 +11,9 @@ workspace = true
 
 [dependencies]
 # reth
-reth.workspace = true
+reth-exex.workspace = true
+# other
+eyre.workspace = true
+futures.workspace = true
+tokio.workspace = true
+tokio-stream.workspace = true
