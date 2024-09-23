@@ -3,4 +3,5 @@ reth-src/exex/target
 .*env
 
 .vscode
+*.DS_Store
 *.pdb
