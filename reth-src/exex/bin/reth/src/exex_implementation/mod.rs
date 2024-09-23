@@ -1,4 +1,4 @@
-//! ExEx implementations
+//! ExEx implementation(s).
 
 mod minimal;
 
