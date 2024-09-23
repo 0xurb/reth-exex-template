@@ -1,0 +1,89 @@
+---
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: 100m
+      max-file: "10"
+
+services:
+  base-reth:
+    # image: ghcr.io/paradigmxyz/op-reth:v1.0.0
+    build: ./reth-src
+    # platform: linux/amd64 # on arch issues sometimes it's needed
+    container_name: base-reth
+    entrypoint: op-reth
+    command: >
+      node
+      --chain=base
+      --rollup.sequencer-http=https://mainnet-sequencer.base.org
+      --datadir="/data"
+      --port 30303
+      --http
+      --http.corsdomain="*"
+      --http.addr=0.0.0.0
+      --http.port=6545
+      --http.api=web3,debug,eth,net,txpool,trace
+      --ws
+      --ws.addr=0.0.0.0
+      --ws.port=6546
+      --ws.origins="*"
+      --ws.api=web3,debug,eth,net,txpool,trace
+      --authrpc.addr=0.0.0.0
+      --authrpc.port=8551
+      --authrpc.jwtsecret=/path/to/jwt.txt
+      --rollup.disable-tx-pool-gossip
+      --nat=extip:85.240.91.167
+      --enable-discv5-discovery
+      --discovery.v5.port=30304
+    env_file:
+      - ./.env
+    volumes:
+      - ./rethdata:/data
+      - ./shared:/shared
+    # network_mode: "host"
+    ports:
+      - "30303:30303"
+      - "6545:6545"
+      - "6546:6546"
+      - "8551:8551"
+    <<: *logging
+
+  base-node:
+    image: ghcr.io/base-org/node:latest
+    container_name: base-node
+    # build: ./base-node
+    depends_on:
+      - base-reth
+    command: ["bash", "./op-node-entrypoint"]
+    env_file:
+      - ./.env
+    volumes:
+      - ./shared:/shared
+    # network_mode: "host"
+    <<: *logging
+
+  pg:
+    image: postgres
+    container_name: pg
+    restart: always
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    # network_mode: "host"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql
+
+  pg_admin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    ports:
+      - "15432:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=does_not_matter@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=does_not_matter
+    depends_on:
+      - pg
