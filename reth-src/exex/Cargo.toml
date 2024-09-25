@@ -8,13 +8,10 @@ rust-version = "1.79.0"
 members = [
     # -- Reth node implementation (with ExEx)
     "bin/reth",
-    "crates/*"
+    "crates/*",
 ]
 default-members = ["bin/reth"]
-exclude = [
-    ".github/",
-    "**/tests/",
-]
+exclude = [".github/", "**/tests/"]
 
 resolver = "2"
 
@@ -133,7 +130,6 @@ codegen-units = 1
 
 [workspace.dependencies]
 exex = { path = "crates/exex" }
-exex-backfill = { path = "crates/backfill" }
 
 # reth
 reth = { git = "https://github.com/paradigmxyz/reth.git" }

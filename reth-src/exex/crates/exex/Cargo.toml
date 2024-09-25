@@ -10,7 +10,6 @@ license.workspace = true
 workspace = true
 
 [dependencies]
-exex-backfill.workspace = true
 
 # reth
 reth.workspace = true

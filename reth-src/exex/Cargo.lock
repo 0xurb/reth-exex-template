@@ -2432,22 +2432,10 @@ dependencies = [
 name = "exex"
 version = "1.0.0"
 dependencies = [
- "exex-backfill",
  "eyre",
  "reth 1.0.3",
  "reth-exex",
  "reth-tracing",
-]
-
-[[package]]
-name = "exex-backfill"
-version = "1.0.0"
-dependencies = [
- "eyre",
- "futures",
- "reth-exex",
- "tokio",
- "tokio-stream",
 ]
 
 [[package]]
