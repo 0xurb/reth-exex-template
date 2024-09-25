@@ -1,4 +1,4 @@
-//! Minimal ExEx example ([`source`](https://github.com/paradigmxyz/reth-exex-examples/blob/main/minimal/src/main.rs))
+//! Minimal `ExEx` example ([`source`](https://github.com/paradigmxyz/reth-exex-examples/blob/main/minimal/src/main.rs))
 //! [`MinimalExEx`] can be constructed as:
 //!
 //! 1. Simple initialization logic, which do the future with chain processing.
@@ -11,7 +11,7 @@ use reth::api::FullNodeComponents;
 
 use exex::{plugin::ExExPlugin, tracing::info, ExExContext, ExExEvent, ExExNotification};
 
-/// Minimal ExEx
+/// Minimal `ExEx`
 #[derive(Debug, Default)]
 pub(crate) struct MinimalExEx;
 
@@ -19,20 +19,20 @@ pub(crate) struct MinimalExEx;
 impl MinimalExEx {
     pub(crate) const ID: &'static str = "Minimal";
 
-    /// The initialization logic of the ExEx is just an async function.
+    /// The initialization logic of the `ExEx` is just an async function.
     ///
-    /// During initialization you can wait for resources you need to be up for the ExEx to function,
-    /// like a database connection.
+    /// During initialization you can wait for resources you need to be up for the `ExEx` to
+    /// function, like a database connection.
     pub(crate) async fn exex_init<Node: FullNodeComponents>(
         ctx: ExExContext<Node>,
     ) -> eyre::Result<impl Future<Output = eyre::Result<()>>> {
-        Ok(MinimalExEx::exex(ctx))
+        Ok(Self::exex(ctx))
     }
 
-    /// An ExEx is just a future, which means you can implement all of it in an async function!
+    /// An `ExEx` is just a future, which means you can implement all of it in an async function!
     ///
-    /// This ExEx just prints out whenever either a new chain of blocks being added, or a chain of
-    /// blocks being re-orged. After processing the chain, emits an [ExExEvent::FinishedHeight]
+    /// This `ExEx` just prints out whenever either a new chain of blocks being added, or a chain of
+    /// blocks being re-orged. After processing the chain, emits an [`ExExEvent::FinishedHeight`]
     /// event.
     async fn exex<Node: FullNodeComponents>(mut ctx: ExExContext<Node>) -> eyre::Result<()> {
         while let Some(notification) = ctx.notifications.recv().await {
@@ -141,13 +141,13 @@ mod tests {
     #[tokio::test]
     #[serial_test::serial]
     async fn test_exex() -> eyre::Result<()> {
-        _test_exex(|ctx| MinimalExEx::exex_init(ctx)).await
+        _test_exex(MinimalExEx::exex_init).await
     }
 
     #[tokio::test]
     #[serial_test::serial]
     async fn test_exex_plugin() -> eyre::Result<()> {
-        let exex = MinimalExEx::default();
+        let exex = MinimalExEx;
 
         _test_exex(|ctx| exex.install_init(ctx, false)).await
     }

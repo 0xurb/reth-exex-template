@@ -37,6 +37,39 @@ build: ## Build the reth binary into `target` directory.
 build-op: ## Build the op-reth binary into `target` directory.
 	cargo build --bin op-reth --features "optimism,$(FEATURES)" --profile "$(PROFILE)"
 
+.PHONY: lint
+lint:
+	make fmt && \
+	make lint-reth && \
+	make lint-op-reth && \
+	make lint-workspace
+
+lint-reth:
+	cargo +nightly clippy \
+		--workspace \
+    	--bin "reth" \
+       	--features "$(FEATURES)" \
+       	--fix \
+       	--allow-staged \
+       	--allow-dirty \
+       	-- -D warnings
+
+lint-op-reth:
+	cargo +nightly clippy \
+    	--workspace \
+    	--bin "op-reth" \
+    	--lib \
+    	--examples \
+    	--tests \
+    	--benches \
+    	--features "optimism,$(FEATURES)" \
+    	-- -D warnings
+
+lint-workspace:
+	cargo +nightly clippy \
+		--workspace \
+		--all-features \
+    	-- -D warnings
 fmt:
 	cargo +nightly fmt
 

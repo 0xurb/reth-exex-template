@@ -3,7 +3,7 @@
 
 pub mod plugin;
 
-/// [reth_exex] re-exports for bin implementation module
+/// [`reth_exex`] re-exports for bin implementation module
 pub use reth_exex::*;
-/// [reth_tracing] re-exports for bin implementation module
+/// [`reth_tracing`] re-exports for bin implementation module
 pub use reth_tracing::*;

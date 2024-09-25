@@ -25,9 +25,9 @@ where
 
     /// The `ExEx` future.
     /// Implements a logic to:
-    /// - receive context notifications ([ExExNotification](`reth_exex::ExExNotification`))
+    /// - receive context notifications ([`ExExNotification`](`reth_exex::ExExNotification`))
     /// - process chain of blocks and their final state ([chain](`Chain`))
-    /// - send events [ExExEvent](`reth_exex::ExExEvent`) to context event channel
+    /// - send events [`ExExEvent`](`reth_exex::ExExEvent`) to context event channel
     fn exex<N: FullNodeComponents>(
         self,
         ctx: ExExContext<N>,

@@ -8,15 +8,15 @@ static ALLOC: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
 #[cfg(not(feature = "optimism"))]
 compile_error!("Cannot build the `op-reth` binary with the `optimism` feature flag disabled. Did you mean to build `reth`?");
 
-mod exex_implementation;
-use exex_implementation::MinimalExEx;
-
 use clap::Parser;
 use eyre::Result;
 
 use reth_node_optimism::{args::RollupArgs, OptimismNode};
 
 use exex::plugin::ExExPlugin;
+
+mod exex_implementation;
+use exex_implementation::MinimalExEx;
 
 /// You also can derive it like:
 /// ```no_run
@@ -30,7 +30,7 @@ fn main() -> Result<()> {
     // let exex_id = MinimalExEx::ID;
     // let exex = |ctx| MinimalExEx::exex_init(ctx);
 
-    let exex = MinimalExEx::default();
+    let exex = MinimalExEx;
     let exex_id = exex.id();
     let exex_plugin = |ctx| exex.install_init(ctx, false);
 
