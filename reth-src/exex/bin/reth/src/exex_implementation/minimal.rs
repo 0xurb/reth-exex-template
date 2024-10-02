@@ -93,7 +93,7 @@ impl ExExPlugin<&str> for MinimalExEx {
 
 #[cfg(test)]
 mod tests {
-    use reth_execution_types::{Chain, ExecutionOutcome};
+    use reth::providers::{Chain, ExecutionOutcome};
     use reth_exex_test_utils::{test_exex_context, Adapter, PollOnce};
     use std::{future::Future, pin::pin};
 

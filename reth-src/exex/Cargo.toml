@@ -132,14 +132,13 @@ codegen-units = 1
 exex = { path = "crates/exex" }
 
 # reth
-reth = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-exex = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-execution-types = { git = "https://github.com/paradigmxyz/reth" }
-reth-node-api = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-node-optimism = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-provider = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-tracing = { git = "https://github.com/paradigmxyz/reth.git" }
+reth = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-exex = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-node-api = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-node-optimism = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-provider = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-tracing = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
 
 clap = "4.5.3"
 eyre = "0.6.12"
@@ -152,6 +151,6 @@ serde_json = "1"
 serde = "1"
 
 # test utils
-reth-exex-test-utils = { git = "https://github.com/paradigmxyz/reth.git" }
-reth-testing-utils = { git = "https://github.com/paradigmxyz/reth.git" }
+reth-exex-test-utils = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
+reth-testing-utils = { git = "https://github.com/paradigmxyz/reth.git", rev = "390f30a" }
 serial_test = "3.1.1"
